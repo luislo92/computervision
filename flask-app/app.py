@@ -3,11 +3,9 @@ from cs50 import SQL
 from tempfile import mkdtemp
 from flask_session import Session
 from functools import wraps
-import datetime
 from werkzeug.security import check_password_hash, generate_password_hash
 
 app = Flask(__name__)
-
 
 # Configure session to use filesystem (instead of signed cookies)
 app.config["SESSION_FILE_DIR"] = mkdtemp()
@@ -98,7 +96,6 @@ def signup():
 @app.route("/homepage", methods=["GET", "POST"])
 @login_required
 def homepage():
-
     rows = db.execute("SELECT date_created, name, calories FROM (SELECT * FROM transactions WHERE date_created "
                       "BETWEEN date('now', '-7 day') and date('now')) as ts, users, foods WHERE users.user_id = "
                       "ts.user_id AND foods.food_id = ts.food_id")
@@ -124,3 +121,9 @@ def logout():
 def profile():
     # TODO
     return render_template("profile.html", name=name, username=username, member_since=member_since)
+
+
+if __name__ == "__main__":
+    app.jinja_env.auto_reload = True
+    app.config['TEMPLATES_AUTO_RELOAD'] = True
+    app.run(debug=True)
