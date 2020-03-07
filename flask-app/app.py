@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, session, redirect, flash, url_for
-import db
+from .db import *
 from tempfile import mkdtemp
 from flask_session import Session
 from functools import wraps
@@ -30,7 +30,7 @@ def login_required(f):
     return decorated_function
 
 
-@app.route("/aboutus")
+@app.route("/")
 def aboutus():
     return render_template("aboutus.html")
 

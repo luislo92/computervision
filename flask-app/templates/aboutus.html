@@ -6,8 +6,8 @@ About Us
 
 {% block navbar %}
 <div class="navbar">
-    <a class="logo-image"></a>
-    <img src="/Users/Shany/Desktop/cv/logo.png" width="260" height="60">
+    <a class="logo-image">
+        <img src="{{ url_for('static', filename='images/logo.png') }}" width="260" height="60">
     </a>
     <a href="/login">LOGIN</a>
     <a class="nav-link" href="/Users/Shany/Desktop/cv/signup.html">SIGNUP</a>
@@ -16,8 +16,10 @@ About Us
 
 {% block main %}
 <div class="mainrectangle">
-    <div class="smallermainrect"><a class="logo-image2"></a>
+    <div class="smallermainrect">
+        <a class="{{ url_for('static', filename='images/logo2.png') }}">
             <img src="/Users/Shany/Desktop/cv/logo2.png" width="430" height="90">
-            </a></div>
+        </a>
+    </div>
 </div>
 {% endblock %}
