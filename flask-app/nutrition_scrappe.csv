@@ -1,4 +1,4 @@
-,name,restaurant,min_value,max_value,mean_value
+food_id,food_name,restaurant,min_value,max_value,mean_value
 0,Arby's Melt,arbys,330,330,330.0
 1,Arby-Q Sandwich,arbys,400,400,400.0
 2,Arbynator,arbys,560,810,685.0

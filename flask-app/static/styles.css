@@ -1,0 +1,13 @@
+html {
+    min-height: 100%;
+    overflow: auto;
+}
+
+body {
+    font-family: 'Anonymous Pro', monospace;  
+    background-color: #FFFBEB;
+}
+
+nav {
+    padding: 100px;
+}

@@ -1,0 +1,59 @@
+html{
+    min-height: 100%;
+    overflow: hidden;
+  }
+
+body{
+    height: calc(100vh - 8em);
+    padding: 4em;
+    color: #F0AB1E;
+    font-family: 'Montserrat';  
+    font-size: 30px;
+    font-weight:bold;
+    background-color: #FFFBEB;
+  }
+
+  .logo-image2{
+      
+  }
+
+  .mainrectangle{
+    width: 750px;
+    height: 600px;
+    background: #F0AB1E;
+    float:center;
+    overflow-x: hidden;
+    margin-top: 100px;
+}
+
+.smallermainrect{
+  width: 680px;
+  height: 600px;
+  background: white;
+  float:center;
+  overflow-x: hidden;
+  margin: 35px 0px 0px 0px;
+}
+.navbar-info {
+    width: 100%;
+}
+
+.navbar {
+    overflow: hidden;
+    background-color: #FFFBEB;
+  }
+  
+  .navbar a {
+    float: right;
+    font-size: 16px;
+    color: #7AD0D5;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+
+
+  .navbar a:hover {
+    background-color: #7AD0D5;
+    color: white;
+  }
