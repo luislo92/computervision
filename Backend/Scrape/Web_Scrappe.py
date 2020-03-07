@@ -44,8 +44,8 @@ def getter(url):
         else:
             min_value.append(0)
             max_value.append(0)
-    return pd.DataFrame({'name':name,'min_value':min_value,
-                         'restaurant': rest,
+    return pd.DataFrame({'name':name,'restaurant': rest,
+                         'min_value':min_value,
                          'max_value':max_value,
                          'mean_value':[mean([min_value[i],max_value[i]]) for i in range(len(min_value))]})
 df = pd.DataFrame()
