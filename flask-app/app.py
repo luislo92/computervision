@@ -33,9 +33,9 @@ def login_required(f):
     return decorated_function
 
 
-@app.route("/aboutUs")
-def aboutUs():
-    return render_template("aboutUs.html")
+@app.route("/aboutus")
+def aboutus():
+    return render_template("aboutus.html")
 
 
 @app.route("/login", methods=["GET", "POST"])
