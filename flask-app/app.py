@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, session, redirect, flash, url_for
-from cs50 import SQL
+import
 from tempfile import mkdtemp
 from flask_session import Session
 from functools import wraps
@@ -15,7 +15,8 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 # Use CS50 Library to use SQLite3 database
-db = SQL("sqlite:///calorievision.db")
+conn = sqlite3.connect('calorievision.db')
+db = conn.cursor()
 
 
 def login_required(f):
