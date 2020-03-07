@@ -56,17 +56,15 @@ def clean_response(texts):
 
 resp = clean_response(texts)
 
-df = pd.read_csv('/Users/luislosada/Downloads/2015-2016 FNDDS At A Glance - FNDDS Nutrient Values.csv')
+df = pd.read_csv('/Users/luislosada/PycharmProjects/computervision/nutrition_scrappe.csv',index_col=0)
 
 m = []
 for res in resp:
-    for food in list(set(df['WWEIA Category description'])):
+    for food in df.name:
         pred = float(model.predict([(res, food)]))
         if pred > 1.3:
             m.append([res,food,pred])
             break
 
-[[float(model.predict([(resp[11], food)])),food] for food in list(set(df['WWEIA Category description']))]
+max([[float(model.predict([(resp[11], food)])),food] for food in df.name])
 
-
-resp[11]

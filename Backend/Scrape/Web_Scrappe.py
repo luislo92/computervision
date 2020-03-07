@@ -53,4 +53,4 @@ for rest in restaurants:
     url = "https://fastfoodnutrition.org"+rest   #"baskin-robbins"
     df = pd.concat([df,getter(url)])
 
-df.to_csv('nutrition_scrappe.csv')
+df.reset_index(drop=True).to_csv('nutrition_scrappe.csv')
