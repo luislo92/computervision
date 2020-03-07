@@ -63,6 +63,7 @@ def scan():
     # TODO
     pass
 
+
 @app.route("/logout")
 @login_required
 def logout():
