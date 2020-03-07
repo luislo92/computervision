@@ -1,0 +1,72 @@
+from google.cloud import vision
+from google.oauth2 import service_account
+import io
+import re
+import string
+from semantic_text_similarity.models import WebBertSimilarity
+import pandas as pd
+
+model = WebBertSimilarity(device='cpu', batch_size=10)
+
+credentials = service_account.Credentials.from_service_account_file(
+    '/Users/luislosada/Downloads/Hack NYU 2020-ede401beb252.json')
+
+client = vision.ImageAnnotatorClient(credentials=credentials)
+path = '/Users/luislosada/Downloads/IMG_3065.JPG'
+with io.open(path, 'rb') as image_file:
+    content = image_file.read()
+
+image = vision.types.Image(content=content)
+
+response = client.text_detection(image=image)
+texts = response.text_annotations
+
+
+def clean_response(texts):
+
+    if response.error.message:
+        raise Exception(
+            '{}\nFor more info on error messages, check: '
+            'https://cloud.google.com/apis/design/errors'.format(
+                response.error.message))
+    else:
+
+        word = []
+        lines = texts[0].description.split('\n')
+        for text in lines:
+            #Eliminating long words or payments
+
+            if len(text) < 100 \
+                and len(text) > 2 \
+                and "$" not in text:
+
+            #Eliminating Numbers
+                try:
+                    if (len("".join(re.findall(r'[0-9]+',text))) / len(text)) < 0.3:
+                        stringIn = text
+                        stringOut = stringIn.translate(str.maketrans('', '', string.punctuation))
+                        word.append(stringOut.lower())
+
+                except IndexError:
+                    stringIn = text.description
+                    stringOut = stringIn.translate(str.maketrans('', '', string.punctuation))
+                    word.append(stringOut.lower())
+
+    return word
+
+resp = clean_response(texts)
+
+df = pd.read_csv('/Users/luislosada/Downloads/2015-2016 FNDDS At A Glance - FNDDS Nutrient Values.csv')
+
+m = []
+for res in resp:
+    for food in list(set(df['WWEIA Category description'])):
+        pred = float(model.predict([(res, food)]))
+        if pred > 1.3:
+            m.append([res,food,pred])
+            break
+
+[[float(model.predict([(resp[11], food)])),food] for food in list(set(df['WWEIA Category description']))]
+
+
+resp[11]
