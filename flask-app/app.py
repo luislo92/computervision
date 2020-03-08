@@ -109,19 +109,21 @@ def scan():
     db_path = db.execute('SELECT * FROM foods')
     if request.method == "POST":
 
-        if not request.args.get("fileInput"):
-            return render_template("error.html")
+        if request.files:
+
+            f = request.files['file']
+
 
         # TODO
-        predictions = bert_sim_model(db_path,request.args.get("fileInput"))
+        predictions = bert_sim_model(db_path, f)
 
-        #redirect(url_for("homepage"))
+        # redirect(url_for("homepage"))
 
         db.execute("INSERT INTO transactions(user_id,food_id) VALUES(:user_id, :food_id)",
                    user_id=session.get("user_id"),
-                   food_id= mean(predictions.mean_value))
+                   food_id=mean(predictions.mean_value))
 
-        return redirect(url_for("homepage"))
+        return render_template("homepage.html")
 
     else:
 
