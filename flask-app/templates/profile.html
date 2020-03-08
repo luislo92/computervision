@@ -1,0 +1,34 @@
+{% extend "layout.html" %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+<style>
+    .mainrectangle {
+        width: 500;
+        height: auto;
+        background: #7AD0D5;
+        float: center;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 20px;
+        text-align: center;
+        margin-left: 15%;
+        margin-right: 15%;
+    }
+</style>
+<!-- Content section -->
+<div class="mainrectangle">
+    <section class="py-5">
+        <div class="container" style="background-color: #F7FFFF; color:black; height: 500px;">
+            <form>
+                <label for="name">Name</label>
+                <input class="form-control" type="text"  id="name" placeholder="Readonly input here…" readonly>
+                <label for="username">Username</label>
+                <input class="form-control" type="text" id="username" placeholder="Readonly input here…" readonly>
+                <label for="date_created">Member Since</label>
+                <input class="form-control" type="date" id="date_created" placeholder="Readonly input here…" readonly>
+            </form>
+        </div>
+    </section>
+</div>
+{% endblock %}

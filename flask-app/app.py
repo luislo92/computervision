@@ -62,7 +62,10 @@ def login():
 def signup():
     if request.method == "POST":
 
-        if not request.form.get("username"):
+        if not request.form.get("name"):
+            return render_template("login.html")
+
+        elif not request.form.get("username"):
             return render_template("login.html")
 
         elif not request.form.get("password"):
@@ -72,7 +75,7 @@ def signup():
             return render_template("login.html")
 
         hashed_pw = generate_password_hash(request.form.get("password"))
-        new_user_id = db.execute("INSERT INTO users (username, hash) VALUES(:username, :hash)",
+        new_user_id = db.execute("INSERT INTO users (name, username, hash) VALUES(:name ,username, :hash)", name=request.form.get("name"),
                                  username=request.form.get("username"),
                                  hash=hashed_pw)
 
@@ -121,7 +124,8 @@ def logout():
 @app.route("/profile")
 @login_required
 def profile():
-    return render_template("profile.html", name=name, username=username, member_since=member_since)
+    data = db.execute("SEARCH * FROM users WHERE user_id = :user_id", user_id=session.get("user_id"))
+    return render_template("profile.html", name=data.name, username=data.username, member_since=data.account_created)
 
 
 if __name__ == "__main__":
