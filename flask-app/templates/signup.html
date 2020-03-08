@@ -5,18 +5,25 @@ Sign Up
 {% endblock %}
 
 {% block main %}
-<!--     <form action="/signup" method="post">-->
-<!--        <div class="form-group">-->
-<!--            <input autocomplete="off" autofocus class="form-control" name="username" placeholder="Username" type="text"/>-->
-<!--        </div>-->
-<!--        <div class="form-group">-->
-<!--            <input class="form-control" name="password" placeholder="Password" type="password"/>-->
-<!--        </div>-->
-<!--        <div class="form-group">-->
-<!--            <input class="form-control" name="confirmation" placeholder="Confirm Password" type="password"/>-->
-<!--        </div>-->
-<!--        <button class="btn btn-primary" type="submit">Register</button>-->
-<!--    </form>-->
 
+<div class="center-forms">
+    <form action="/signup" method="post">
+        <div class="form-group" style="align-content: center;">
+            <label for="username">Username</label>
+            <input type="text" autofocus autocomplete="off" class="form-control" id="username"
+                placeholder="Username" name="username">
+            <small id="emailHelp" class="form-text text-muted">Please enter a username.</small>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" placeholder="Password" name="password">
+        </div>
+        <div class="form-group">
+            <label for="confirmation">Confirm Password</label>
+            <input type="password" class="form-control" id="confirmation" placeholder="Confirm Password" name="confirmation">
+        </div>
+        <button type="submit" class="btn" style="background-color: #7AD0D5; border-color: #7AD0D5;">Submit</button>
+    </form>
+</div>
 
 {% endblock %}

@@ -81,13 +81,13 @@ def signup():
                                  hash=hashed_pw)
 
         if not new_user_id:
-            return render_template("login.html")
+            return render_template("error.html")
 
         session["user_id"] = new_user_id
 
         flash("You have been registered")
 
-        return redirect(url_for("homepage"))
+        return render_template("homepage.html")
 
     else:
         return render_template("signup.html")
@@ -126,4 +126,4 @@ def profile():
 if __name__ == "__main__":
     app.jinja_env.auto_reload = True
     app.config['TEMPLATES_AUTO_RELOAD'] = True
-    app.run(debug=True)
+    app.run(debug=False)

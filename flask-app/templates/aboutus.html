@@ -1,17 +1,36 @@
 {% extends "layout.html" %}
 
-{% block css %}
-<link rel="stylesheet" type="text/css" href="/static/calorievision.css">
-{% endblock %}
-
 {% block title %}
 About Us
 {% endblock %}
 
 {% block main %}
-<div class="mainrectangle">
-    <div class="smallermainrect">
-            <img src="/static/images/logo2.png" width="430" height="90">
+    <header class="py-5 bg-image-full" style="background-color: #FFFBEB;">
+    <img class="img-fluid d-block mx-auto" src="{{ url_for('static', filename='images/logo.png') }}" width="500" height="100" alt="">
+  </header>
+<!--   Image Section - set the background image for the header in the line below -->
+  <style>
+   .mainrectangle {
+      width: 500;
+      height: auto;
+      background: #7AD0D5;
+      float: center;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 20px;
+      text-align: center;
+  }
+
+   </style>
+  <!-- Content section -->
+  <div class="mainrectangle" >
+  <section class="py-5">
+    <div class="container" style="background-color: #F7FFFF; color:black; height: 200px">
+      <p class="lead"><p><br></p><p>Login. Upload. Done. </p>
+      <p>Automatically record your calories intake with an easy upload image of your food reciepts. </p>
+
+      </p>
     </div>
+
+  </section>
 </div>
 {% endblock %}

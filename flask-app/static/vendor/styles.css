@@ -3,11 +3,22 @@ html {
     overflow: auto;
 }
 
-body {
-    font-family: 'Anonymous Pro', monospace;  
+body{
+    font-family: 'Montserrat', sans-serif;
     background-color: #FFFBEB;
 }
 
 /* nav {
     padding: 100px;
 } */
+
+.center-forms {
+    border-style: solid;
+    border-width: 30px;
+    border-color: #7AD0D5;
+    background-color: #FFFBEB;
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-top: 50px;
+    padding: 20px;
+}
