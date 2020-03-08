@@ -4,7 +4,6 @@ from tempfile import mkdtemp
 from flask_session import Session
 from functools import wraps
 from werkzeug.security import check_password_hash, generate_password_hash
-from ..vision import *
 
 app = Flask(__name__)
 

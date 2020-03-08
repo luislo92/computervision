@@ -8,9 +8,9 @@ body{
     background-color: #FFFBEB;
 }
 
-/* nav {
-    padding: 100px;
-} */
+a.nav-link:hover {
+    background-color: #7AD0D5;
+}
 
 .center-forms {
     border-style: solid;
