@@ -4,9 +4,10 @@ import io
 import re
 import string
 import pandas as pd
+import sys
 
 credentials = service_account.Credentials.from_service_account_file(
-    '/Users/luislosada/Downloads/Hack NYU 2020-ede401beb252.json')
+    'flask-app/credentials/Hack NYU 2020-ede401beb252.json')
 
 client = vision.ImageAnnotatorClient(credentials=credentials)
 path = '/Users/luislosada/Downloads/IMG_3065.JPG'
@@ -52,4 +53,5 @@ def clean_response(texts):
 
 resp = clean_response(texts)
 
+resp
 df = pd.read_csv('/Users/luislosada/PycharmProjects/computervision/nutrition_scrappe.csv',index_col=0)
