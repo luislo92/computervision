@@ -23,9 +23,9 @@ Scan
     <section class="py-5">
         <div class="container" style="background-color: #F7FFFF; color:black; height: 500px;">
             <form action="/scan" method="post">
-                <button type="submit"><img src="{{ url_for('static', filename='upload2.png') }}"></button>
+                <button type="submit" style="margin-top: 30px;"><img src="{{ url_for('static', filename='upload2.png') }}" width="200px" height="200px"></button>
                 <div class="form-group">
-                    <label for="fileInput">Receipt input</label>
+                    <label for="fileInput">Please upload a .jpg or a .png file to scan.</label>
                     <input type="file" class="form-control-file" id="fileInput" accept="image/png, image/jpeg">
                 </div>
             </form>
