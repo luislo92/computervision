@@ -5,11 +5,9 @@ import re
 import string
 import pandas as pd
 import sys
-sys.path.append("/Users/luislosada/PycharmProjects/computervision/Backend/Models/Similarity.py")
-from Similarity.py import Bert_Sim_Model
 
 credentials = service_account.Credentials.from_service_account_file(
-    '/Users/luislosada/Downloads/Hack NYU 2020-ede401beb252.json')
+    'flask-app/credentials/Hack NYU 2020-ede401beb252.json')
 
 client = vision.ImageAnnotatorClient(credentials=credentials)
 path = '/Users/luislosada/Downloads/IMG_3065.JPG'
