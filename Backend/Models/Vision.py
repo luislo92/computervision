@@ -4,6 +4,9 @@ import io
 import re
 import string
 import pandas as pd
+import sys
+sys.path.append("/Users/luislosada/PycharmProjects/computervision/Backend/Models/Similarity.py")
+from Similarity.py import Bert_Sim_Model
 
 credentials = service_account.Credentials.from_service_account_file(
     '/Users/luislosada/Downloads/Hack NYU 2020-ede401beb252.json')
@@ -52,4 +55,5 @@ def clean_response(texts):
 
 resp = clean_response(texts)
 
+resp
 df = pd.read_csv('/Users/luislosada/PycharmProjects/computervision/nutrition_scrappe.csv',index_col=0)
