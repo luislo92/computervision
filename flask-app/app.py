@@ -4,7 +4,7 @@ from tempfile import mkdtemp
 from flask_session import Session
 from functools import wraps
 from werkzeug.security import check_password_hash, generate_password_hash
-import vision
+from vision import bert_sim_model
 
 app = Flask(__name__)
 
@@ -101,13 +101,23 @@ def homepage():
 @app.route("/scan", methods=["GET", "POST"])
 @login_required
 def scan():
+    db_path = db.execute('SELECT * FROM foods')
     if request.method == "POST":
+
         if not request.args.get("fileInput"):
             return render_template("error.html")
 
         # TODO
+        predictions = bert_sim_model(db_path,request.args.get("fileInput"))
+
+        #redirect(url_for("homepage"))
+
+        db.execute("INSERT INTO transactions(user_id,food_id) VALUES(,) ")
+        return render_template('predictor.html',
+                                prediction=predictions)
 
     else:
+
         return render_template("scan.html")
 
 
