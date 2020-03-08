@@ -59,9 +59,8 @@ def clean_response(image_path):
         for text in lines:
             #Eliminating long words or payments
 
-            if len(text) < 100 \
-                and len(text) > 2 \
-                and "$" not in text:
+            if 100 > len(text) > 2 \
+                    and "$" not in text:
 
             #Eliminating Numbers
                 try:
@@ -88,9 +87,9 @@ def clean_response(image_path):
 def select_rest(db_path,image_path):
 
     resp = clean_response(image_path)
-    df = db_path
+    df = [row[0]['restaurant'] for row in db_path]
     rest_comp = " ".join(resp)
-    for rest in list(set(df.restaurant)):
+    for rest in list(set(df)):
         if rest.replace("-", " ") in rest_comp:
             ind = rest
             resp = [line for line in resp if rest not in line]
@@ -110,7 +109,11 @@ def bert_sim_model(db_path,image_path):
 
     #Building the Model
     model = WebBertSimilarity(device='cpu', batch_size=10)
-    df = db_path
+    df = pd.DataFrame({'food_name':[row[0]['food_name'] for row in db_path],
+                       'restaurant': [row[0]['restaurant'] for row in db_path],
+                       'mean_value':[row[0]['mean_value'] for row in db_path]
+    })
+
     rest_s = select_rest(db_path, image_path)
     ind,fixed_rep = rest_s[0],rest_s[1]
 
