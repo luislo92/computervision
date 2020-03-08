@@ -3,10 +3,7 @@ from google.oauth2 import service_account
 import io
 import re
 import string
-from semantic_text_similarity.models import WebBertSimilarity
 import pandas as pd
-
-model = WebBertSimilarity(device='cpu', batch_size=10)
 
 credentials = service_account.Credentials.from_service_account_file(
     '/Users/luislosada/Downloads/Hack NYU 2020-ede401beb252.json')
@@ -20,7 +17,6 @@ image = vision.types.Image(content=content)
 
 response = client.text_detection(image=image)
 texts = response.text_annotations
-
 
 def clean_response(texts):
 
@@ -48,7 +44,7 @@ def clean_response(texts):
                         word.append(stringOut.lower())
 
                 except IndexError:
-                    stringIn = text.description
+                    stringIn = text
                     stringOut = stringIn.translate(str.maketrans('', '', string.punctuation))
                     word.append(stringOut.lower())
 
@@ -57,14 +53,3 @@ def clean_response(texts):
 resp = clean_response(texts)
 
 df = pd.read_csv('/Users/luislosada/PycharmProjects/computervision/nutrition_scrappe.csv',index_col=0)
-
-m = []
-for res in resp:
-    for food in df.name:
-        pred = float(model.predict([(res, food)]))
-        if pred > 1.3:
-            m.append([res,food,pred])
-            break
-
-max([[float(model.predict([(resp[11], food)])),food] for food in df.name])
-
