@@ -5,4 +5,32 @@ Scan
 {% endblock %}
 
 {% block main %}
+<style>
+    .mainrectangle {
+        width: 500;
+        height: auto;
+        background: #7AD0D5;
+        float: center;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 20px;
+        text-align: center;
+        margin-left: 15%;
+        margin-right: 15%;
+    }
+</style>
+<!-- Content section -->
+<div class="mainrectangle">
+    <section class="py-5">
+        <div class="container" style="background-color: #F7FFFF; color:black; height: 500px;">
+            <form action="/scan" method="post">
+                <button type="submit"><img src="{{ url_for('static', filename='upload2.png') }}"></button>
+                <div class="form-group">
+                    <label for="fileInput">Receipt input</label>
+                    <input type="file" class="form-control-file" id="fileInput" accept="image/png, image/jpeg">
+                </div>
+            </form>
+        </div>
+
+    </section>
+</div>
 {% endblock %}

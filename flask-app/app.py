@@ -17,15 +17,10 @@ db = SQL("sqlite:///calorievision.db")
 
 
 def login_required(f):
-    """
-    Decorate routes to require login.
-    http://flask.pocoo.org/docs/0.12/patterns/viewdecorators/
-    """
-
     @wraps(f)
     def decorated_function(*args, **kwargs):
         if session.get("user_id") is None:
-            return redirect("/login")
+            return redirect(url_for('login'))
         return f(*args, **kwargs)
 
     return decorated_function
@@ -96,17 +91,16 @@ def signup():
 @app.route("/homepage", methods=["GET", "POST"])
 @login_required
 def homepage():
-    rows = db.execute("SELECT date_created, name, calories FROM (SELECT * FROM transactions WHERE date_created "
-                      "BETWEEN date('now', '-7 day') and date('now')) as ts, users, foods WHERE users.user_id = "
-                      "ts.user_id AND foods.food_id = ts.food_id")
+    rows = db.execute("SELECT date_created, food_name, restaurant, mean_value FROM (SELECT * FROM transactions WHERE "
+                      "date_created BETWEEN date('now', '-7 day') and date('now')) as ts, users, foods WHERE "
+                      "users.user_id = ts.user_id AND foods.food_id = ts.food_id")
     return render_template("homepage.html", rows=rows)
 
 
 @app.route("/scan", methods=["GET", "POST"])
 @login_required
 def scan():
-    # TODO
-    pass
+    return render_template("scan.html")
 
 
 @app.route("/logout")
@@ -126,4 +120,4 @@ def profile():
 if __name__ == "__main__":
     app.jinja_env.auto_reload = True
     app.config['TEMPLATES_AUTO_RELOAD'] = True
-    app.run(debug=False)
+    app.run(debug=True)
