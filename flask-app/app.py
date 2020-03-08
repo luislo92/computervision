@@ -76,7 +76,8 @@ def signup():
             return render_template("login.html")
 
         hashed_pw = generate_password_hash(request.form.get("password"))
-        new_user_id = db.execute("INSERT INTO users (name, username, hash) VALUES(:name ,username, :hash)", name=request.form.get("name"),
+        new_user_id = db.execute("INSERT INTO users (name, username, hash) VALUES(:name , :username, :hash)",
+                                 name=request.form.get("name"),
                                  username=request.form.get("username"),
                                  hash=hashed_pw)
 
