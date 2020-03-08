@@ -64,16 +64,16 @@ def signup():
     if request.method == "POST":
 
         if not request.form.get("name"):
-            return render_template("login.html")
+            return render_template("error.html", message="Please enter a name.")
 
         elif not request.form.get("username"):
-            return render_template("login.html")
+            return render_template("error.html", message="Please enter a username.")
 
         elif not request.form.get("password"):
-            return render_template("login.html")
+            return render_template("error.html", message="Please enter a password.")
 
         elif not request.form.get("password") == request.form.get("confirmation"):
-            return render_template("login.html")
+            return render_template("error.html", message="Please make the password and the confirmation the same.")
 
         hashed_pw = generate_password_hash(request.form.get("password"))
         new_user_id = db.execute("INSERT INTO users (name, username, hash) VALUES(:name , :username, :hash)",
@@ -82,7 +82,7 @@ def signup():
                                  hash=hashed_pw)
 
         if not new_user_id:
-            return render_template("error.html")
+            return render_template("error.html", message="This username has been taken.")
 
         session["user_id"] = new_user_id
 
@@ -123,7 +123,11 @@ def scan():
                    user_id=session.get("user_id"),
                    food_id=mean(predictions.mean_value))
 
-        return render_template("homepage.html")
+        rows = db.execute(
+            "SELECT date_created, food_name, restaurant, mean_value FROM (SELECT * FROM transactions WHERE "
+            "date_created BETWEEN date('now', '-7 day') and date('now')) as ts, users, foods WHERE "
+            "users.user_id = ts.user_id AND foods.food_id = ts.food_id")
+        return render_template("homepage.html", rows=rows)
 
     else:
 
