@@ -4,6 +4,7 @@ import io
 import re
 import string
 import pandas as pd
+import similarity
 
 def load_image(path):
     #'/Users/luislosada/Downloads/IMG_3065.JPG'
@@ -65,5 +66,5 @@ def clean_response(texts):
 
 resp = clean_response(texts)
 
-resp
+similarity.__name__
 df = pd.read_csv('/Users/luislosada/PycharmProjects/computervision/nutrition_scrappe.csv',index_col=0)
