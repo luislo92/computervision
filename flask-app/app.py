@@ -1,4 +1,4 @@
-import db.py
+from ..vision import *
 from flask import Flask, render_template, request, session, redirect, flash, url_for
 from cs50 import SQL
 from tempfile import mkdtemp
