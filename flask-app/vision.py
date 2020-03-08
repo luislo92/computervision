@@ -5,6 +5,7 @@ import re
 import string
 import pandas as pd
 
+
 def load_image(path):
     #'/Users/luislosada/Downloads/IMG_3065.JPG'
     path = path
