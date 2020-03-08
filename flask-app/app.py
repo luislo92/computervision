@@ -5,6 +5,7 @@ from flask_session import Session
 from functools import wraps
 from werkzeug.security import check_password_hash, generate_password_hash
 from vision import bert_sim_model
+from numpy import mean
 
 app = Flask(__name__)
 
@@ -115,9 +116,11 @@ def scan():
 
         #redirect(url_for("homepage"))
 
-        db.execute("INSERT INTO transactions(user_id,food_id) VALUES(,) ")
-        return render_template('predictor.html',
-                                prediction=predictions)
+        db.execute("INSERT INTO transactions(user_id,food_id) VALUES(:user_id, :food_id)",
+                   user_id=session.get("user_id"),
+                   food_id= mean(predictions.mean_value))
+
+        return redirect(url_for("homepage"))
 
     else:
 
