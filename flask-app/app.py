@@ -4,7 +4,7 @@ from tempfile import mkdtemp
 from flask_session import Session
 from functools import wraps
 from werkzeug.security import check_password_hash, generate_password_hash
-from vision import bert_sim_model
+import vision
 
 app = Flask(__name__)
 
@@ -15,6 +15,7 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 db = SQL("sqlite:///calorievision.db")
+
 
 def login_required(f):
     @wraps(f)
@@ -38,10 +39,10 @@ def login():
     if request.method == "POST":
 
         if not request.form.get("username"):
-            return render_template("error.html", message="Please enter a username")
+            return render_template("error.html", message="Please enter a username.")
 
         elif not request.form.get("password"):
-            return render_template("error.html")
+            return render_template("error.html", message="Please enter your password.")
 
         rows = db.execute("SELECT * FROM users WHERE username = :username",
                           username=request.form.get("username"))
@@ -100,7 +101,14 @@ def homepage():
 @app.route("/scan", methods=["GET", "POST"])
 @login_required
 def scan():
-    return render_template("scan.html")
+    if request.method == "POST":
+        if not request.args.get("fileInput"):
+            return render_template("error.html")
+
+        # TODO
+
+    else:
+        return render_template("scan.html")
 
 
 @app.route("/logout")
@@ -113,7 +121,6 @@ def logout():
 @app.route("/profile")
 @login_required
 def profile():
-    # TODO
     return render_template("profile.html", name=name, username=username, member_since=member_since)
 
 
